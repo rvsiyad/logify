@@ -10,12 +10,18 @@
     "Other"
   ],
   "activationEvents": [],
-  "main": "./extension.js",
+  "main": "./src/extension.js",
   "contributes": {
-    "commands": [{
-      "command": "logify.helloWorld",
-      "title": "Hello World"
-    }]
+    "commands": [
+      {
+        "command": "logify.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "logify.addConsole",
+        "title": "Add console.dir()"
+      }
+    ]
   },
   "scripts": {
     "lint": "eslint .",
