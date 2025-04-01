@@ -2,6 +2,10 @@
 
 const vscode = require('vscode')
 
+/**
+ * Inserts a print statement underneath the highlighted variable. Determines if the highlighted variable is on the last
+ * line in the document and works accordingly to add a new line to populate with a print statement.
+ */
 function addConsole() {
 	const editor = vscode.window.activeTextEditor
 	const document = editor.document
@@ -29,6 +33,13 @@ function addConsole() {
 		}
 	}
 }
+
+/**
+ * Retrieves the currently highlighted text from the document and returns the highlighted variable and its
+ * line position.
+ *
+ * @returns {object} Returns the highlighted text and the line it is located at on the document.
+ */
 function getHighlightedVariable() {
 	const editor = vscode.window.activeTextEditor
 	const selection = editor.selection
@@ -46,11 +57,6 @@ function getHighlightedVariable() {
 	}
 
 	return null
-}
-
-function addConsole() {
-	const selection = getHighlightedVariable()
-	console.log(selection)
 }
 
 module.exports = {
