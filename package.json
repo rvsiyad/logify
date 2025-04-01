@@ -21,7 +21,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "vscode-test --headless"
+    "test": "vscode-test"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
