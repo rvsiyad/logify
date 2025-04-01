@@ -22,7 +22,7 @@ jobs:
           node-version: '18'
 
       - name: Install Chrome dependencies
-        run: sudo apt-get install -y libnss3 libx11-xcb1 libxcomposite1 libxcursor1 libxdamage1 libxi6 libxtst6 libxrandr2 libasound2 libpangocairo-1.0-0 libpangoft2-1.0-0 libcups2 libdrm2 libgbm1
+        run: sudo apt-get install -y libnss3 libx11-xcb1 libxcomposite1 libxcursor1 libxdamage1 libxi6 libxtst6 libxrandr2 libpangocairo-1.0-0 libpangoft2-1.0-0 libcups2 libdrm2 libgbm1
 
       - name: Install xvfb
         run: sudo apt-get install -y xvfb
