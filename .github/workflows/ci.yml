@@ -21,12 +21,6 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Set npm registry
-        run: npm config set registry https://registry.npmjs.org/
-
-      - name: Clear npm cache
-        run: npm cache clean --force
-
       - name: Install dependencies
         run: npm ci
 
