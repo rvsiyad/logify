@@ -19,10 +19,16 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '17'
+          node-version: '18'
+
+      - name: Set npm registry
+        run: npm config set registry https://registry.npmjs.org/
+
+      - name: Clear npm cache
+        run: npm cache clean --force
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run tests
         run: npm test
