@@ -3,26 +3,39 @@ name: CI
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out code
-      uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '22'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install Chrome dependencies
+        run: sudo apt-get install -y libnss3 libx11-xcb1 libxcomposite1 libxcursor1 libxdamage1 libxi6 libxtst6 libxrandr2 libpangocairo-1.0-0 libpangoft2-1.0-0 libcups2 libdrm2 libgbm1
 
-    - name: Run tests
-      run: npm run test
+      - name: Install xvfb
+        run: sudo apt-get install -y xvfb
+
+      - name: Start xvfb
+        run: |
+          export DISPLAY=':99.0'
+          nohup Xvfb :99 -screen 0 1280x1024x24 &
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        env:
+          DISPLAY: ':99.0'
+        run: npm test
