@@ -7,6 +7,7 @@ export default [{
             ...globals.commonjs,
             ...globals.node,
             ...globals.mocha,
+            structuredClone: "readonly",  // Add this line
         },
 
         ecmaVersion: 2022,
