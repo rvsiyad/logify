@@ -27,8 +27,6 @@ describe('Commands', function () {
     if (!fs.existsSync(tempWorkspacePath)) {
       fs.rmdir(tempWorkspacePath)
     }
-
-
   })
 
   describe('addConsole() command', function () {
@@ -53,6 +51,31 @@ describe('Commands', function () {
         const result = editor.document.getText()
 
         assert.strictEqual(result, 'const myVariable = 42\nconsole.dir(myVariable, { depth: null, color: true })')
+      })
+    })
+
+    describe('when a file has content as well as the variable', function () {
+      before(async function () {
+        // Create a new .js file and add content
+        const document = await vscode.workspace.openTextDocument({
+          content: 'const myVariable = 42\n//This is a comment\n//This is another comment',
+          language: 'javascript'
+        })
+
+        await vscode.window.showTextDocument(document)
+      })
+
+      it('Adds a console underneath the highlighted variable with the content directly underneath', async function () {
+        // Select the highlighted variable
+        const editor = vscode.window.activeTextEditor
+        editor.selection = new vscode.Selection(0, 6, 0, 16)
+
+        await vscode.commands.executeCommand('logify.addConsole')
+
+        const result = editor.document.getText()
+        console.log('🚀🚀🚀 ~ result:', result)
+
+        assert.strictEqual(result, 'const myVariable = 42\nconsole.dir(myVariable, { depth: null, color: true })\n//This is a comment\n//This is another comment')
       })
     })
   })
