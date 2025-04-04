@@ -48,6 +48,7 @@ describe('Commands', function () {
   describe('addConsole() command', function () {
     describe('when there is no content surrounding the variable', function () {
       it('adds a console underneath the highlighted variable', async function () {
+        console.log("Before commands.js test execution is running")
         // Select the highlighted variable
         const editor = vscode.window.activeTextEditor
         editor.selection = new vscode.Selection(0, 6, 0, 17)
