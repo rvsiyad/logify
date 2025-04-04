@@ -16,19 +16,19 @@ function addConsole() {
 
 		if (linePosition >= 0 && linePosition <= document.lineCount) {
 			editor.edit((editBuilder) => {
-					if (linePosition + 1 === document.lineCount) {
-							const position = new vscode.Position(linePosition + 1, 0)
-							editBuilder.insert(position, '\n' + `console.dir(${highlightedText}, { depth: null, color: true })`)
-					} else {
-							const position = new vscode.Position(linePosition + 1, 0)
-							editBuilder.insert(position, `console.dir(${highlightedText}, { depth: null, color: true })` + '\n')
-					}
+				if (linePosition + 1 === document.lineCount) {
+					const position = new vscode.Position(linePosition + 1, 0)
+					editBuilder.insert(position, '\n' + `console.dir(${highlightedText}, { depth: null, color: true })`)
+				} else {
+					const position = new vscode.Position(linePosition + 1, 0)
+					editBuilder.insert(position, `console.dir(${highlightedText}, { depth: null, color: true })` + '\n')
+				}
 			}).then(success => {
-					if (success) {
-							console.log('Console statement added successfully.')
-					} else {
-							console.error('Failed to add console statement.')
-					}
+				if (success) {
+					console.log('Console statement added successfully.')
+				} else {
+					console.error('Failed to add console statement.')
+				}
 			})
 		}
 	}
