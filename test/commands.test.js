@@ -23,12 +23,6 @@ describe('Commands', function () {
 
     console.log("log 3: After creating directory")
 
-    // Constructs a new file path for a file
-    const workspaceFolder = vscode.Uri.file(tempWorkspacePath)
-    vscode.workspace.updateWorkspaceFolders(0, null, { uri: workspaceFolder })
-
-    console.log("log 4: After constructing the workspaceFolder")
-
     try {
       // Wait for the workspace to be ready
       await new Promise(resolve => setTimeout(resolve, 1000))
@@ -58,7 +52,6 @@ describe('Commands', function () {
       throw error
     }
   })
-
 
   afterEach(function () {
     // Clean up the workspace after each test
