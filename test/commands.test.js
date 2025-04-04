@@ -10,7 +10,7 @@ const vscode = require('vscode')
 describe('Commands', function () {
   let tempWorkspacePath
 
-  beforeEach(function () {
+  before(async function () {
     // Set up a clean workspace before each test
     tempWorkspacePath = path.join(__dirname, 'tempWorkspace')
 
@@ -20,7 +20,15 @@ describe('Commands', function () {
 
     // Constructs a new file path for a file
     const workspaceFolder = vscode.Uri.file(tempWorkspacePath)
-    return vscode.workspace.updateWorkspaceFolders(0, null, { uri: workspaceFolder })
+    vscode.workspace.updateWorkspaceFolders(0, null, { uri: workspaceFolder })
+
+    // Create a new .js file and add content
+    const document = await vscode.workspace.openTextDocument({
+      content: 'const variableOne = 42\n\nconst variableTwo = 24\n//This is a comment\n//This is another comment',
+      language: 'javascript'
+    })
+
+    await vscode.window.showTextDocument(document)
   })
 
   afterEach(function () {
