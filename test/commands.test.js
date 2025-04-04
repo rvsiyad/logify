@@ -1,6 +1,6 @@
 'use strict'
 
-const { it, describe, before, beforeEach, afterEach } = require('mocha')
+const { it, describe, before, afterEach } = require('mocha')
 
 const assert = require('assert')
 const fs = require('fs')
@@ -46,27 +46,35 @@ describe('Commands', function () {
   })
 
   describe('addConsole() command', function () {
-    describe('when a file has only the variable', function () {
-      before(async function () {
-        // Create a new .js file and add content
-        const document = await vscode.workspace.openTextDocument({
-          content: 'const myVariable = 42',
-          language: 'javascript'
-        })
-
-        await vscode.window.showTextDocument(document)
-      })
-
-      it('Adds a console underneath the highlighted variable', async function () {
+    describe('when there is no content surrounding the variable', function () {
+      it('adds a console underneath the highlighted variable', async function () {
         // Select the highlighted variable
         const editor = vscode.window.activeTextEditor
-        editor.selection = new vscode.Selection(0, 6, 0, 16)
+        editor.selection = new vscode.Selection(0, 6, 0, 17)
 
         await vscode.commands.executeCommand('logify.addConsole')
 
         const result = await editor.document.getText()
 
+        assert.strictEqual(result, 'const variableOne = 42\nconsole.dir(variableOne, { depth: null, color: true })\n\nconst variableTwo = 24\n//This is a comment\n//This is another comment')
+      })
+    })
+
+    describe('when there is content surrounding the variable', function () {
+      it('adds a console underneath the highlighted variable with the content directly underneath', async function () {
+        // Select the highlighted variable
+        const editor = vscode.window.activeTextEditor
+        editor.selection = new vscode.Selection(3, 6, 3, 17)
+
         assert.strictEqual(result, 'const myVariable = 42\nconsole.dir(myVariable, { depth: null, color: true })')
+        await vscode.commands.executeCommand('logify.addConsole')
+
+        const result = await editor.document.getText()
+
+        // Check if the console is added in the correct location
+        const expectedText = 'const variableOne = 42\nconsole.dir(variableOne, { depth: null, color: true })\n\nconst variableTwo = 24\nconsole.dir(variableTwo, { depth: null, color: true })\n//This is a comment\n//This is another comment'
+
+        assert.strictEqual(result, expectedText)
       })
     })
   })
