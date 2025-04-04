@@ -12,6 +12,8 @@ describe('Commands', function () {
 
   before(async function () {
     // Set up a clean workspace before each test
+    console.log("Before commands.js test execution is running")
+
     tempWorkspacePath = path.join(__dirname, 'tempWorkspace')
 
     if (!fs.existsSync(tempWorkspacePath)) {
