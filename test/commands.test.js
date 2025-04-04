@@ -12,7 +12,7 @@ describe('Commands', function () {
 
   before(async function () {
     // Set up a clean workspace before each test
-    console.log("Before commands.js test execution is running")
+    console.log("log 1: Before commands.js test execution is running")
 
     tempWorkspacePath = path.join(__dirname, 'tempWorkspace')
 
@@ -31,6 +31,8 @@ describe('Commands', function () {
     })
 
     await vscode.window.showTextDocument(document)
+
+    console.log("log 2: Before commands.js test execution finished running")
   })
 
   afterEach(function () {
