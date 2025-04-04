@@ -15,33 +15,44 @@ describe('Commands', function () {
 
     tempWorkspacePath = path.join(__dirname, 'tempWorkspace')
 
+    console.log("log 2: After tempWorkspacePath")
+
     if (!fs.existsSync(tempWorkspacePath)) {
       fs.mkdirSync(tempWorkspacePath)
     }
+
+    console.log("log 3: After creating directory")
 
     // Constructs a new file path for a file
     const workspaceFolder = vscode.Uri.file(tempWorkspacePath)
     vscode.workspace.updateWorkspaceFolders(0, null, { uri: workspaceFolder })
 
-    // Give some time for the workspace to update
-    await new Promise(resolve => setTimeout(resolve, 500))
+    console.log("log 4: After constructing the workspaceFolder")
 
     try {
+      // Wait for the workspace to be ready
+      await new Promise(resolve => setTimeout(resolve, 1000))
+
       // Create a new .js file and add content
       const document = await vscode.workspace.openTextDocument({
         content: 'const variableOne = 42\n\nconst variableTwo = 24\n//This is a comment\n//This is another comment',
         language: 'javascript'
       })
 
-      await vscode.window.showTextDocument(document)
+      console.log("log 5: After creating the .js file")
 
-      // Check if the active text editor is correctly set
-      const editor = vscode.window.activeTextEditor
+      const editor = await vscode.window.showTextDocument(document, { preview: false, preserveFocus: false })
+
+      console.log("log 6: After opening the text document")
+
+      // Ensure the editor is ready before moving on
+      await new Promise(resolve => setTimeout(resolve, 500))
+
       if (!editor) {
         throw new Error("Failed to open text document in the editor")
       }
 
-      console.log("log 2: Before commands.js test execution finished running")
+      console.log("log 7: Before commands.js test execution finished running")
     } catch (error) {
       console.error("Error in before hook:", error)
       throw error
