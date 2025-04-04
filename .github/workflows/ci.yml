@@ -38,4 +38,6 @@ jobs:
       - name: Run tests
         env:
           DISPLAY: ':99.0'
-        run: npm test
+        run: |
+          mkdir -p test-results
+          npm test -- --reporter spec --reporter-options mochaFile=test-results/test-results.xml | tee test-results/test-output.log
