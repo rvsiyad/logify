@@ -11,7 +11,6 @@ describe('Commands', function () {
   let tempWorkspacePath
 
   before(async function () {
-    // Set up a clean workspace before each test
     console.log("log 1: Before commands.js test execution is running")
 
     tempWorkspacePath = path.join(__dirname, 'tempWorkspace')
@@ -24,16 +23,31 @@ describe('Commands', function () {
     const workspaceFolder = vscode.Uri.file(tempWorkspacePath)
     vscode.workspace.updateWorkspaceFolders(0, null, { uri: workspaceFolder })
 
-    // Create a new .js file and add content
-    const document = await vscode.workspace.openTextDocument({
-      content: 'const variableOne = 42\n\nconst variableTwo = 24\n//This is a comment\n//This is another comment',
-      language: 'javascript'
-    })
+    // Give some time for the workspace to update
+    await new Promise(resolve => setTimeout(resolve, 500))
 
-    await vscode.window.showTextDocument(document)
+    try {
+      // Create a new .js file and add content
+      const document = await vscode.workspace.openTextDocument({
+        content: 'const variableOne = 42\n\nconst variableTwo = 24\n//This is a comment\n//This is another comment',
+        language: 'javascript'
+      })
 
-    console.log("log 2: Before commands.js test execution finished running")
+      await vscode.window.showTextDocument(document)
+
+      // Check if the active text editor is correctly set
+      const editor = vscode.window.activeTextEditor
+      if (!editor) {
+        throw new Error("Failed to open text document in the editor")
+      }
+
+      console.log("log 2: Before commands.js test execution finished running")
+    } catch (error) {
+      console.error("Error in before hook:", error)
+      throw error
+    }
   })
+
 
   afterEach(function () {
     // Clean up the workspace after each test
