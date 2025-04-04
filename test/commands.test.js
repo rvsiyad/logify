@@ -66,8 +66,9 @@ describe('Commands', function () {
         const editor = vscode.window.activeTextEditor
         editor.selection = new vscode.Selection(3, 6, 3, 17)
 
-        assert.strictEqual(result, 'const myVariable = 42\nconsole.dir(myVariable, { depth: null, color: true })')
+        // Execute the command and wait 0.2 seconds as the tests are running too fast
         await vscode.commands.executeCommand('logify.addConsole')
+        await new Promise(resolve => setTimeout(resolve, 200))
 
         const result = await editor.document.getText()
 
