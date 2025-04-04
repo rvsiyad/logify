@@ -11,17 +11,11 @@ describe('Commands', function () {
   let tempWorkspacePath
 
   before(async function () {
-    console.log("log 1: Before commands.js test execution is running")
-
     tempWorkspacePath = path.join(__dirname, 'tempWorkspace')
-
-    console.log("log 2: After tempWorkspacePath")
 
     if (!fs.existsSync(tempWorkspacePath)) {
       fs.mkdirSync(tempWorkspacePath)
     }
-
-    console.log("log 3: After creating directory")
 
     try {
       // Wait for the workspace to be ready
@@ -33,11 +27,7 @@ describe('Commands', function () {
         language: 'javascript'
       })
 
-      console.log("log 5: After creating the .js file")
-
       const editor = await vscode.window.showTextDocument(document, { preview: false, preserveFocus: false })
-
-      console.log("log 6: After opening the text document")
 
       // Ensure the editor is ready before moving on
       await new Promise(resolve => setTimeout(resolve, 500))
@@ -45,10 +35,7 @@ describe('Commands', function () {
       if (!editor) {
         throw new Error("Failed to open text document in the editor")
       }
-
-      console.log("log 7: Before commands.js test execution finished running")
     } catch (error) {
-      console.error("Error in before hook:", error)
       throw error
     }
   })
@@ -70,7 +57,6 @@ describe('Commands', function () {
   describe('addConsole() command', function () {
     describe('when there is no content surrounding the variable', function () {
       it('adds a console underneath the highlighted variable', async function () {
-        console.log("Before commands.js test execution is running")
         // Select the highlighted variable
         const editor = vscode.window.activeTextEditor
         editor.selection = new vscode.Selection(0, 6, 0, 17)
