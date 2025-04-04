@@ -91,7 +91,7 @@ describe('Commands', function () {
 
         // Execute the command and wait 0.2 seconds as the tests are running too fast
         await vscode.commands.executeCommand('logify.addConsole')
-        await new Promise(resolve => setTimeout(resolve, 200))
+        await new Promise(resolve => setTimeout(resolve, 1000))
 
         const result = await editor.document.getText()
 
