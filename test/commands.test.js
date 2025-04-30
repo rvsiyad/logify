@@ -110,5 +110,44 @@ describe('Commands', function () {
         assert.strictEqual(result, expectedText)
       })
     })
+
+    describe('when descriptive console log is enabled', function () {
+      beforeEach(async function () {
+        const config = vscode.workspace.getConfiguration('logify')
+        await config.update('logOptions', ['showVariableNameLog'], vscode.ConfigurationTarget.Global)
+      })
+
+      afterEach(async function () {
+        const config = vscode.workspace.getConfiguration('logify')
+        await config.update('logOptions', [''], vscode.ConfigurationTarget.Global)
+      })
+
+      it('adds console.log and console.dir for the highlighted variable', async function () {
+        const editor = vscode.window.activeTextEditor
+
+        editor.selection = new vscode.Selection(7, 6, 7, 19)
+
+        // Run the command
+        await vscode.commands.executeCommand('logify.addConsole')
+        await new Promise(resolve => setTimeout(resolve, 500))
+
+        const result = editor.document.getText()
+
+        const expectedText = 'const variableOne = 42\n' +
+        'console.dir(variableOne, { depth: null, colors: true })\n' +
+        '\n' +
+        'const variableTwo = 24\n' +
+        'console.dir(variableTwo, { depth: null, colors: true })\n'+
+        '//This is a comment\n' +
+        '//This is another comment' +
+        '\n' +
+        'const variableThree = 65\n' +
+        `console.log('🚀🚀🚀 ~ variableThree:')\n` +
+        'console.dir(variableThree, { depth: null, colors: true })\n'
+
+        assert.strictEqual(result.trim(), expectedText.trim())
+      })
+    })
+
   })
 })
