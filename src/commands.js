@@ -26,7 +26,7 @@ function addConsole() {
 		logText += `console.log('🚀🚀🚀 ~ ${highlightedText}:')\n`
 	}
 
-	logText += `console.dir(${highlightedText}, { depth: null, colors: true })`
+	logText += `console.dir(${highlightedText}, { depth: null, colors: true })\n`
 
 	if (linePosition >= 0 && linePosition <= document.lineCount) {
 		editor.edit((editBuilder) => {
