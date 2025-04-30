@@ -65,7 +65,7 @@ describe('Commands', function () {
 
         const result = await editor.document.getText()
 
-        assert.strictEqual(result, 'const variableOne = 42\nconsole.dir(variableOne, { depth: null, color: true })\n\nconst variableTwo = 24\n//This is a comment\n//This is another comment')
+        assert.strictEqual(result, 'const variableOne = 42\nconsole.dir(variableOne, { depth: null, colors: true })\n\nconst variableTwo = 24\n//This is a comment\n//This is another comment')
       })
     })
 
@@ -82,7 +82,7 @@ describe('Commands', function () {
         const result = await editor.document.getText()
 
         // Check if the console is added in the correct location
-        const expectedText = 'const variableOne = 42\nconsole.dir(variableOne, { depth: null, color: true })\n\nconst variableTwo = 24\nconsole.dir(variableTwo, { depth: null, color: true })\n//This is a comment\n//This is another comment'
+        const expectedText = 'const variableOne = 42\nconsole.dir(variableOne, { depth: null, colors: true })\n\nconst variableTwo = 24\nconsole.dir(variableTwo, { depth: null, colors: true })\n//This is a comment\n//This is another comment'
 
         assert.strictEqual(result, expectedText)
       })
