@@ -23,7 +23,13 @@ describe('Commands', function () {
 
       // Create a new .js file and add content
       const document = await vscode.workspace.openTextDocument({
-        content: 'const variableOne = 42\n\nconst variableTwo = 24\n//This is a comment\n//This is another comment',
+        content: 'const variableOne = 42\n' +
+        '\n'+
+        'const variableTwo = 24\n' +
+        '//This is a comment\n' +
+        '//This is another comment' +
+        '\n' +
+        'const variableThree = 65',
         language: 'javascript'
       })
 
@@ -65,7 +71,16 @@ describe('Commands', function () {
 
         const result = await editor.document.getText()
 
-        assert.strictEqual(result, 'const variableOne = 42\nconsole.dir(variableOne, { depth: null, colors: true })\n\nconst variableTwo = 24\n//This is a comment\n//This is another comment')
+        const expectedText = 'const variableOne = 42\n' +
+        'console.dir(variableOne, { depth: null, colors: true })\n' +
+        '\n' +
+        'const variableTwo = 24\n' +
+        '//This is a comment\n' +
+        '//This is another comment' +
+        '\n' +
+        'const variableThree = 65'
+
+        assert.strictEqual(result, expectedText)
       })
     })
 
@@ -82,7 +97,15 @@ describe('Commands', function () {
         const result = await editor.document.getText()
 
         // Check if the console is added in the correct location
-        const expectedText = 'const variableOne = 42\nconsole.dir(variableOne, { depth: null, colors: true })\n\nconst variableTwo = 24\nconsole.dir(variableTwo, { depth: null, colors: true })\n//This is a comment\n//This is another comment'
+        const expectedText = 'const variableOne = 42\n' +
+        'console.dir(variableOne, { depth: null, colors: true })\n' +
+        '\n' +
+        'const variableTwo = 24\n' +
+        'console.dir(variableTwo, { depth: null, colors: true })\n'+
+        '//This is a comment\n' +
+        '//This is another comment' +
+        '\n' +
+        'const variableThree = 65'
 
         assert.strictEqual(result, expectedText)
       })
