@@ -8,31 +8,42 @@ const vscode = require('vscode')
  */
 function addConsole() {
 	const editor = vscode.window.activeTextEditor
+	if (!editor) return
+
 	const document = editor.document
 	const highlightedVariable = getHighlightedVariable()
+	if (!highlightedVariable) return
 
-	if (highlightedVariable) {
-		const { linePosition, highlightedText } = highlightedVariable
+	const { linePosition, highlightedText } = highlightedVariable
 
-		if (linePosition >= 0 && linePosition <= document.lineCount) {
-			editor.edit((editBuilder) => {
-				if (linePosition + 1 === document.lineCount) {
-					const position = new vscode.Position(linePosition + 1, 0)
-					editBuilder.insert(position, '\n' + `console.dir(${highlightedText}, { depth: null, color: true })`)
-				} else {
-					const position = new vscode.Position(linePosition + 1, 0)
-					editBuilder.insert(position, `console.dir(${highlightedText}, { depth: null, color: true })` + '\n')
-				}
-			}).then(success => {
-				if (success) {
-					console.log('Console statement added successfully.')
-				} else {
-					console.error('Failed to add console statement.')
-				}
-			})
-		}
+	const config = vscode.workspace.getConfiguration('logify')
+	const options = config.get('logOptions', [])
+	const showVariableNameLog = options.includes('showVariableNameLog')
+
+	let logText = ''
+
+	if (showVariableNameLog) {
+		logText += `console.log('🚀🚀🚀 ~ ${highlightedText}:')\n`
+	}
+
+	logText += `console.dir(${highlightedText}, { depth: null, colors: true })`
+
+	if (linePosition >= 0 && linePosition <= document.lineCount) {
+		editor.edit((editBuilder) => {
+			const position = new vscode.Position(linePosition + 1, 0)
+			const insertText = (linePosition + 1 === document.lineCount ? '\n' : '') + logText
+			editBuilder.insert(position, insertText)
+		}).then(success => {
+			if (success) {
+				console.log('Console statement added successfully.')
+			} else {
+				console.error('Failed to add console statement.')
+			}
+		})
 	}
 }
+
+
 
 /**
  * Retrieves the currently highlighted text from the document and returns the highlighted variable and its
