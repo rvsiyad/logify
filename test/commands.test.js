@@ -1,6 +1,6 @@
 'use strict'
 
-const { it, describe, before, afterEach } = require('mocha')
+const { it, describe, afterEach, before, beforeEach} = require('mocha')
 
 const assert = require('assert')
 const fs = require('fs')
@@ -46,7 +46,11 @@ describe('Commands', function () {
     }
   })
 
-  afterEach(function () {
+  afterEach(async function () {
+    // After each test, clear out our setting
+    const config = vscode.workspace.getConfiguration('logify')
+    await config.update('logOptions', [], vscode.ConfigurationTarget.Global)
+
     // Clean up the workspace after each test
     return new Promise((resolve, reject) => {
       if (fs.existsSync(tempWorkspacePath)) {
