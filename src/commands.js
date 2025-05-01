@@ -17,12 +17,11 @@ function addConsole() {
 	const { linePosition, highlightedText } = highlightedVariable
 
 	const config = vscode.workspace.getConfiguration('logify')
-	const options = config.get('logOptions', [])
-	const showVariableNameLog = options.includes('showVariableNameLog')
+	const enableDescriptiveLog = config.get('enableDescriptiveLogging', false)
 
 	let logText = ''
 
-	if (showVariableNameLog) {
+	if (enableDescriptiveLog) {
 		logText += `console.log('🚀🚀🚀 ~ ${highlightedText}:')\n`
 	}
 
@@ -42,8 +41,6 @@ function addConsole() {
 		})
 	}
 }
-
-
 
 /**
  * Retrieves the currently highlighted text from the document and returns the highlighted variable and its

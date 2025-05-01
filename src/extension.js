@@ -5,51 +5,31 @@
 const vscode = require('vscode')
 const { addConsole } = require('./commands')
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
-
 /**
+ * This method is called when your extension is activated
+ * Your extension is activated the very first time the command is execute
+ *
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "logify" is now active!')
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('logify.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
-
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from logify!')
-	})
-
+	// Main command that adds console.dir
 	const addConsoleCommand = vscode.commands.registerCommand('logify.addConsole', function () {
 		addConsole()
 	})
 
+	// Toggles the boolean setting "logify.showVariableNameLog"
 	const toggleShowVariableNameLog = vscode.commands.registerCommand('logify.toggleShowVariableNameLog', async () => {
 		const config = vscode.workspace.getConfiguration('logify')
-		const currentOptions = config.get('logOptions', [])
+		const isEnabled = config.get('enableDescriptiveLog', false)
 
-		const settingKey = 'showVariableNameLog'
-		const isEnabled = currentOptions.includes(settingKey)
-
-		const updatedOptions = isEnabled
-			? currentOptions.filter(opt => opt !== settingKey)
-			: [...currentOptions, settingKey]
-
-		await config.update('logOptions', updatedOptions, vscode.ConfigurationTarget.Global)
+		await config.update('enableDescriptiveLog', !isEnabled, vscode.ConfigurationTarget.Global)
 
 		vscode.window.showInformationMessage(
-			`Descriptive console log is ${isEnabled ? 'disabled' : 'enabled'}`
+			`Descriptive console log is now ${!isEnabled ? 'enabled' : 'disabled'}`
 		)
 	})
 
-	context.subscriptions.push(disposable)
+	// Register all commands
 	context.subscriptions.push(addConsoleCommand)
 	context.subscriptions.push(toggleShowVariableNameLog)
 }
