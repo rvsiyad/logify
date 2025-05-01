@@ -1,7 +1,7 @@
 {
   "name": "logify",
   "displayName": "Logify",
-  "publisher": "rvsiyad",
+  "publisher": "RobleSiyad",
   "description": "Quickly insert colourful and deep-inspection console.dir statements in JavaScript.",
   "icon": "images/logify-icon.png",
   "repository": {
