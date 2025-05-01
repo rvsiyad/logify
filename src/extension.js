@@ -29,7 +29,6 @@ function activate(context) {
 
 	const addConsoleCommand = vscode.commands.registerCommand('logify.addConsole', function () {
 		addConsole()
-		vscode.window.showInformationMessage('Activate console command')
 	})
 
 	const toggleShowVariableNameLog = vscode.commands.registerCommand('logify.toggleShowVariableNameLog', async () => {
