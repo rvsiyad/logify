@@ -18,10 +18,6 @@
   "contributes": {
     "commands": [
       {
-        "command": "logify.helloWorld",
-        "title": "Hello World"
-      },
-      {
         "command": "logify.addConsole",
         "title": "Logify: Add Console Dir"
       },
