@@ -31,25 +31,19 @@ function activate(context) {
 		addConsole()
 	})
 
+	// Toggles the boolean setting "logify.showVariableNameLog"
 	const toggleShowVariableNameLog = vscode.commands.registerCommand('logify.toggleShowVariableNameLog', async () => {
 		const config = vscode.workspace.getConfiguration('logify')
-		const currentOptions = config.get('logOptions', [])
+		const isEnabled = config.get('enableDescriptiveLog', false)
 
-		const settingKey = 'showVariableNameLog'
-		const isEnabled = currentOptions.includes(settingKey)
-
-		const updatedOptions = isEnabled
-			? currentOptions.filter(opt => opt !== settingKey)
-			: [...currentOptions, settingKey]
-
-		await config.update('logOptions', updatedOptions, vscode.ConfigurationTarget.Global)
+		await config.update('enableDescriptiveLog', !isEnabled, vscode.ConfigurationTarget.Global)
 
 		vscode.window.showInformationMessage(
-			`Descriptive console log is ${isEnabled ? 'disabled' : 'enabled'}`
+			`Descriptive console log is now ${!isEnabled ? 'enabled' : 'disabled'}`
 		)
 	})
 
-	context.subscriptions.push(disposable)
+	// Register all commands
 	context.subscriptions.push(addConsoleCommand)
 	context.subscriptions.push(toggleShowVariableNameLog)
 }
