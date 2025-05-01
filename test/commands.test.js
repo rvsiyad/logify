@@ -49,7 +49,7 @@ describe('Commands', function () {
   afterEach(async function () {
     // After each test, clear out our setting
     const config = vscode.workspace.getConfiguration('logify')
-    await config.update('logOptions', [], vscode.ConfigurationTarget.Global)
+    await config.update('enableDescriptiveLogging', false, vscode.ConfigurationTarget.Global)
 
     // Clean up the workspace after each test
     return new Promise((resolve, reject) => {
@@ -118,12 +118,12 @@ describe('Commands', function () {
     describe('when descriptive console log is enabled', function () {
       beforeEach(async function () {
         const config = vscode.workspace.getConfiguration('logify')
-        await config.update('logOptions', ['showVariableNameLog'], vscode.ConfigurationTarget.Global)
+        await config.update('enableDescriptiveLogging', true, vscode.ConfigurationTarget.Global)
       })
 
       afterEach(async function () {
         const config = vscode.workspace.getConfiguration('logify')
-        await config.update('logOptions', [''], vscode.ConfigurationTarget.Global)
+        await config.update('enableDescriptiveLogging', false, vscode.ConfigurationTarget.Global)
       })
 
       it('adds console.log and console.dir for the highlighted variable', async function () {
