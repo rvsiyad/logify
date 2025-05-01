@@ -1,14 +1,24 @@
 {
   "name": "logify",
-  "displayName": "logify",
-  "description": "A simple way to effortlessly print logs to the VS Code console with this user-friendly extension",
+  "displayName": "Logify",
+  "description": "Quickly insert colourful and deep-inspection console.dir statements in JavaScript.",
+  "icon": "./images/logify-icon.png",
   "version": "0.0.1",
+  "categories": [
+    "Debuggers",
+    "Other"
+  ],
+  "keywords": [
+    "console",
+    "log",
+    "debug",
+    "dir",
+    "JavaScript",
+    "colors"
+  ],
   "engines": {
     "vscode": "^1.96.0"
   },
-  "categories": [
-    "Other"
-  ],
   "activationEvents": [],
   "main": "./src/extension.js",
   "scripts": {
