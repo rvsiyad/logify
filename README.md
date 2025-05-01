@@ -1,3 +1,44 @@
+# Logify
+
+Logify makes debugging JavaScript objects easier by inserting `console.dir` statements with full depth and colors.
+
+## ✨ Features
+
+- Quickly insert `console.dir(obj, { depth: null, colors: true })`
+- Helps inspect deeply nested structures
+- Works with selected text or auto-generates a variable reference
+
+## 💡 Usage
+
+Select a variable and run **Logify: Insert console.dir** from the Command Palette.
+
+Or keyboard shortcuts! Logify is bound to:
+
+- **macOS**: <kbd>Ctrl</kbd>+<kbd>Option</kbd>+<kbd>L</kbd>  
+- **Windows/Linux**: <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>L</kbd>  
+
+## 📸 Screenshots
+
+_Add a GIF or image showing it in action_
+
+## 🛠️ Requirements
+
+None — works out of the box with JavaScript.
+
+## 🚀 Release Notes
+
+### 1.0.0
+- Initial release of Logify 🎉
+
+
+
+
+
+
+
+
+
+
 # logify README
 
 This is the README for your extension "logify". After writing up a brief description, we recommend including the following sections.
