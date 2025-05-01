@@ -31,20 +31,12 @@
       }
     ],
     "configuration": {
-      "type": "object",
-      "title": "Logify Settings",
+      "title": "Logify settings",
       "properties": {
-        "logify.logOptions": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "showVariableNameLog"
-            ]
-          },
-          "default": [],
-          "description": "Add console.log with variable name above console.dir",
-          "uniqueItems": true
+        "logify.enableDescriptiveLogging": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include a descriptive console.log with the variable name before the console.dir call."
         }
       }
     },
