@@ -14,8 +14,8 @@ Select a variable and run **Logify: Insert console.dir** from the Command Palett
 
 Or keyboard shortcuts! Logify is bound to:
 
-- **macOS**: <kbd>Ctrl</kbd>+<kbd>Option</kbd>+<kbd>L</kbd>  
-- **Windows/Linux**: <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>L</kbd>  
+- **macOS**: <kbd>Ctrl</kbd>+<kbd>Option</kbd>+<kbd>L</kbd>
+- **Windows/Linux**: <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>L</kbd>
 
 ## 📸 Screenshots
 
@@ -24,6 +24,21 @@ _Add a GIF or image showing it in action_
 ## 🛠️ Requirements
 
 None — works out of the box with JavaScript.
+
+## ⚙️ Extension Settings
+
+Logify provides the following setting to customize logging behavior:
+
+| Setting                               | Description                                                                                           | Default |
+|---------------------------------------|-------------------------------------------------------------------------------------------------------|---------|
+| `logify.enableDescriptiveLogging`     | If enabled, Logify will prepend a descriptive `console.log` statement (including the variable name) before the `console.dir` output. | `false` |
+
+### Changing Settings in the UI
+
+1. Open **Command Palette** (`Cmd/Ctrl + Shift + P`)
+2. Choose **Preferences: Open Settings (UI)**
+3. Search for **Logify**
+4. Toggle **Enable Descriptive Logging** on or off
 
 ## 🚀 Release Notes
 
