@@ -11,6 +11,10 @@
   ],
   "activationEvents": [],
   "main": "./src/extension.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "vscode-test"
+  },
   "contributes": {
     "commands": [
       {
@@ -43,11 +47,15 @@
           "uniqueItems": true
         }
       }
-    }
-  },
-  "scripts": {
-    "lint": "eslint .",
-    "test": "vscode-test"
+    },
+    "keybindings": [
+      {
+        "command": "logify.addConsole",
+        "key": "ctrl+alt+l",
+        "mac": "ctrl+alt+l",
+        "when": "editorTextFocus && !editorReadonly"
+      }
+    ]
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
