@@ -44,3 +44,8 @@ Logify provides the following setting to customize logging behavior:
 
 ### 1.0.0
 - Initial release of Logify 🎉
+
+## Repository
+
+Source code and issue tracking:
+👉 [github.com/rvsiyad/logify](https://github.com/rvsiyad/logify)

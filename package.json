@@ -3,6 +3,10 @@
   "displayName": "Logify",
   "description": "Quickly insert colourful and deep-inspection console.dir statements in JavaScript.",
   "icon": "./images/logify-icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rvsiyad/logify.git"
+  },
   "version": "0.0.1",
   "categories": [
     "Debuggers",
