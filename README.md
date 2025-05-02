@@ -42,6 +42,10 @@ Logify provides the following setting to customize logging behavior:
 
 ## 🚀 Release Notes
 
+### 1.0.1
+- Fixed indentation of inserted `console.log` and `console.dir` statements to match the highlighted line’s whitespace
+- Ensured that logs inserted on the last line always appear on a new line (no concatenation with code)
+
 ### 1.0.0
 - Initial release of Logify 🎉
 
