@@ -29,7 +29,9 @@ describe('Commands', function () {
         '//This is a comment\n' +
         '//This is another comment' +
         '\n' +
-        'const variableThree = 65',
+        'const variableThree = 65' +
+        '\n' +
+        '    const variableFour = 100\n',
         language: 'javascript'
       })
 
@@ -82,7 +84,9 @@ describe('Commands', function () {
         '//This is a comment\n' +
         '//This is another comment' +
         '\n' +
-        'const variableThree = 65'
+        'const variableThree = 65' +
+        '\n' +
+        '    const variableFour = 100\n'
 
         assert.strictEqual(result, expectedText)
       })
@@ -109,7 +113,9 @@ describe('Commands', function () {
         '//This is a comment\n' +
         '//This is another comment' +
         '\n' +
-        'const variableThree = 65'
+        'const variableThree = 65' +
+        '\n' +
+        '    const variableFour = 100\n'
 
         assert.strictEqual(result, expectedText)
       })
@@ -147,11 +153,41 @@ describe('Commands', function () {
         '\n' +
         'const variableThree = 65\n' +
         `console.log('🚀🚀🚀 ~ variableThree:')\n` +
-        'console.dir(variableThree, { depth: null, colors: true })\n'
+        'console.dir(variableThree, { depth: null, colors: true })\n' +
+        '    const variableFour = 100\n'
 
-        assert.strictEqual(result.trim(), expectedText.trim())
+        assert.strictEqual(result, expectedText)
       })
     })
 
+    // describe('when the variable is indented with space', function () {
+    //   it('matches the number of indentations of the line of the variable', async function () {
+    //     const editor = vscode.window.activeTextEditor
+
+    //     editor.selection = new vscode.Selection(13, 11, 13, 22)
+
+    //     // Run the command
+    //     await vscode.commands.executeCommand('logify.addConsole')
+    //     await new Promise(resolve => setTimeout(resolve, 500))
+
+    //     const result = editor.document.getText()
+
+    //     const expectedText = 'const variableOne = 42\n' +
+    //     'console.dir(variableOne, { depth: null, colors: true })\n' +
+    //     '\n' +
+    //     'const variableTwo = 24\n' +
+    //     'console.dir(variableTwo, { depth: null, colors: true })\n'+
+    //     '//This is a comment\n' +
+    //     '//This is another comment' +
+    //     '\n' +
+    //     'const variableThree = 65\n' +
+    //     `console.log('🚀🚀🚀 ~ variableThree:')\n` +
+    //     'console.dir(variableThree, { depth: null, colors: true })\n' +
+    //     '    const variableFour = 100\n' +
+    //     '    console.dir(variableFour, { depth: null, colors: true })'
+
+    //     assert.strictEqual(result.trim(), expectedText.trim())
+    //   })
+    // })
   })
 })
